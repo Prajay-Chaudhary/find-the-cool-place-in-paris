@@ -11,7 +11,8 @@ const ResultsTable = ({ data, selectedArrondissements, selectedFilters, loading 
 
     return data.filter((item) => {
       const isPaid = item.payant === "Oui";
-      return (selectedFilters.paid && isPaid) || (selectedFilters.free && !isPaid);
+      const isFree = item.payant === "Non";
+      return (selectedFilters.paid && isPaid) || (selectedFilters.free && isFree);
     });
   };
 
