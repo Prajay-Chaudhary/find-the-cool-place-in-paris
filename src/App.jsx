@@ -1,14 +1,22 @@
-import './index.css';
+import React from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './routes/Home';
 
-function App() {
-
+// Main component for the application
+const App = () => {
   return (
     <>
-      <div>
-        <p className='text-red-500 text-center'>test app</p>
-      </div>
+      <Router>
+        <div className="App">
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

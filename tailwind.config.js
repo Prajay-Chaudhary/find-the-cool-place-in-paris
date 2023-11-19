@@ -7,7 +7,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'nexa': ['Nexa', 'sans-serif'],
+      },
+      textColor: {
+        'main-color': '#5f259f',
+      },
+    },
   },
   plugins: [],
 }
