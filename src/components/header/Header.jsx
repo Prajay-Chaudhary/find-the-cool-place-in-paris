@@ -3,9 +3,9 @@ import React from 'react'
 const Header = () => {
   return (
     <>
-      <div className='text-center m-3'>
-        <p className="font-nexa text-5xl font-bold">Cool place finder app in Paris</p>
-      </div>
+      <header style={{ backgroundColor: '#5f259f', color: 'white' }} className="p-4 text-center">
+        <h1 className="font-nexa text-5xl">Cool place finder app in Paris</h1>
+      </header>
     </>
   )
 }

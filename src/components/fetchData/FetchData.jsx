@@ -10,14 +10,20 @@ const FetchData = () => {
   const [data, setData] = useState([]);
   const [selectedArrondissements, setSelectedArrondissements] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({ paid: false, free: false });
-
-  // New state to store the count of available data for each arrondissement
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedDays, setSelectedDays] = useState([]);
   const [arrondissementCounts, setArrondissementCounts] = useState({});
 
+  // Handle checkbox change for paid and free filters.
   const handleCheckboxChange = (filter) => {
     setSelectedFilters((prevFilters) => ({ ...prevFilters, [filter]: !prevFilters[filter] }));
   };
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // useEffect hook to fetch and merge data from different sources.
   useEffect(() => {
     const fetchData = () => {
       try {
@@ -80,38 +86,58 @@ const FetchData = () => {
     return mergedData;
   };
 
+  // handle Days category 
+  const handleDayChange = (day) => {
+    setSelectedDays((prevDays) => {
+      if (prevDays.includes(day)) {
+        return prevDays.filter((d) => d !== day);
+      } else {
+        return [...prevDays, day];
+      }
+    });
+  };
+
   return (
-    <div>
-      <FilterComponent
-        onFilterChange={(filterName, value) => console.log(`Filter ${filterName}: ${value}`)}
-        onCheckboxChange={handleCheckboxChange}
-      />
-      <div>
-        {Array.from({ length: 20 }, (_, i) => {
-          const arrondissementNumber = i + 1;
-          const arrondissement = arrondissementNumber <= 9 ? `7500${arrondissementNumber}` : `750${arrondissementNumber}`;
-          return (
-            <div key={arrondissement}>
-              <input
-                type="checkbox"
-                id={arrondissement}
-                name={arrondissement}
-                value={arrondissement}
-                onChange={() => setSelectedArrondissements((prev) => toggleArrondissement(prev, arrondissement))}
-              />
-              <label htmlFor={arrondissement}>{arrondissement}</label>
-              <span style={{ marginLeft: '8px' }}>({arrondissementCounts[arrondissement]})</span>
-            </div>
-          );
-        })}
+    <>
+      <div className="lg:flex flex-row justify-between items-start p-4">
+        <div className="md:w-1/4 mr-4">
+          <FilterComponent
+            onCheckboxChange={handleCheckboxChange}
+            onCategoryChange={handleCategoryChange}
+            onDayChange={handleDayChange}
+          />
+          <div>
+            <h2 className="text-lg font-semibold mb-2 text-main-color">Category by Arrondissement</h2>
+            {Array.from({ length: 20 }, (_, i) => {
+              const arrondissementNumber = i + 1;
+              const arrondissement = arrondissementNumber <= 9 ? `7500${arrondissementNumber}` : `750${arrondissementNumber}`;
+              return (
+                <div key={arrondissement} className='m-2'>
+                  <input
+                    type="checkbox"
+                    id={arrondissement}
+                    name={arrondissement}
+                    value={arrondissement}
+                    onChange={() => setSelectedArrondissements((prev) => toggleArrondissement(prev, arrondissement))}
+                  />
+                  <label htmlFor={arrondissement}>{arrondissement}</label>
+                  <span style={{ marginLeft: '8px' }}>({arrondissementCounts[arrondissement]})</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <ResultsTable
+          data={data}
+          selectedArrondissements={selectedArrondissements}
+          selectedFilters={selectedFilters}
+          selectedCategory={selectedCategory}
+          selectedDays={selectedDays}
+          loading={loading}
+          className="w-3/4"
+        />
       </div>
-      <ResultsTable
-        data={data}
-        selectedArrondissements={selectedArrondissements}
-        selectedFilters={selectedFilters}
-        loading={loading}
-      />
-    </div>
+    </>
   );
 };
 
