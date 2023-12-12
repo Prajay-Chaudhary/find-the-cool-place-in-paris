@@ -1,8 +1,7 @@
-# React + Vite
+# Cool place finder app in Paris
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##### A web application for the people in Paris where they can find cool places near to them. <br/>
 
-Currently, two official plugins are available:
+- The data are displayed using https://opendata.paris.fr api<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img src="https://res.cloudinary.com/dhvmmjasb/image/upload/v1702410063/Screenshot_2023-12-12_at_19.51.30_vgk6dh.png" alt="Aid platform" />
