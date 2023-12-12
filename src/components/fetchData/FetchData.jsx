@@ -97,6 +97,15 @@ const FetchData = () => {
     });
   };
 
+  // Toggles the presence of an 'arrondissement' in the given array.
+  const toggleArrondissement = (arrondissements, arrondissement) => {
+    if (arrondissements.includes(arrondissement)) {
+      return arrondissements.filter((item) => item !== arrondissement);
+    } else {
+      return [...arrondissements, arrondissement];
+    }
+  };
+
   return (
     <>
       <div className="lg:flex flex-row justify-between items-start p-4">
@@ -139,15 +148,6 @@ const FetchData = () => {
       </div>
     </>
   );
-};
-
-// Toggles the presence of an 'arrondissement' in the given array.
-const toggleArrondissement = (arrondissements, arrondissement) => {
-  if (arrondissements.includes(arrondissement)) {
-    return arrondissements.filter((item) => item !== arrondissement);
-  } else {
-    return [...arrondissements, arrondissement];
-  }
 };
 
 export default FetchData;
